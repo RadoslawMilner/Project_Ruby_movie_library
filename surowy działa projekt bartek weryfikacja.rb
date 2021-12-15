@@ -1,12 +1,12 @@
 class Account
-
   attr_reader :login_name
+  
   def initialize(login_name)
     @login_name = login_name
   end
   
   def log_in(login_password)
-    puts login_password == password ? "Welcome #{@login_name}!" : login_password_error
+    login_password == password ? puts("Welcome #{@login_name}!") : login_password_error
   end
   
   private
@@ -16,7 +16,8 @@ class Account
   end
   
   def login_password_error
-    "Access denied: incorrect password."
+    puts "Access denied: incorrect password."
+    exit
   end
 end
 
@@ -56,9 +57,13 @@ loop do
     title = gets.chomp.capitalize
     if movies[title.to_sym].nil? 
       puts "How do you rate this movie?"
-      rating = gets.chomp
-      movies[title.to_sym] = rating.to_i
-      puts "The movie has been added to the library."
+      rating = gets.chomp.to_i
+      if rating.between?(1,10)
+        movies[title.to_sym] = rating
+        puts "The movie has been added to the library."
+      else
+        puts "Rating of movie should have value 1 to 10."
+      end
     else
       puts "That movie already exists! Its rating is #{movies[title.to_sym]}."
     end
