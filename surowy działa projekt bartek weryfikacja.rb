@@ -23,8 +23,10 @@ end
 
 puts "Username"
 user = gets.chomp
+
 puts "Password"
 identification = gets.chomp
+
 my_account = Account.new(user.to_s)
 my_account.log_in(identification.to_i)
 
